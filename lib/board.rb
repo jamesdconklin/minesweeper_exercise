@@ -26,10 +26,13 @@ class Board
         curr = grid[idy][idx]
         if curr
           right = grid[idy][idx+1]
-          byebug
           down = grid[idy+1][idx]
+          down_right = grid[idy+1][idx+1]
+          down_left = grid[idy+1][idx-1]
           curr.connect(right) if right
           curr.connect(down) if down
+          curr.connect(down_right) if down_right
+          curr.connect(down_left) if down_left
         end
       end
     end
