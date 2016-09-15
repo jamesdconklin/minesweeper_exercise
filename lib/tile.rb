@@ -27,7 +27,10 @@ class Tile < Vertex
     count = 1
     if adjacent_bombs == 0
        @neighbors.each do |neighbor, _|
-        count+= neighbor.flip unless neighbor.revealed or neighbor.flag
+        unless neighbor.revealed
+          neighbor.toggle_flag if neighbor.flag
+          count+= neighbor.flip
+        end
       end
     end
     count
@@ -38,6 +41,7 @@ class Tile < Vertex
   end
 
   def to_s
+    return "[F]" if @flag
     if @revealed
       if value
         "[B]"
