@@ -3,10 +3,21 @@ require 'byebug'
 
 class Board
   attr_reader :grid
+  attr_accessor :cards_left
 
   def initialize(grid)
     @grid = grid
+    @cards_left = 0
+    @grid.each do |row|
+      row.each do |tile|
+        @cards_left += 1 unless tile.value
+      end
+    end
   end
+
+   def won?
+     @cards_left <= 0
+   end
 
   def self.grid_from_file(file_name)
     grid = []
@@ -43,6 +54,21 @@ class Board
 
     self.connect_grid(grid)
     self.new(grid)
+  end
+
+  def [](pos)
+    y,x = pos
+    @grid[y][x]
+  end
+
+  def toggle_flag(pos)
+    self[pos].toggle_flag
+  end
+
+  def flip(pos)
+    flipped = self[pos].flip
+    @cards_left -= flipped
+    flipped
   end
 
   def to_s

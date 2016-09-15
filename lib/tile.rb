@@ -19,17 +19,18 @@ class Tile < Vertex
   end
 
   def flip
-    return if flag
+    return 0 if @flag || @revealed
     @revealed = true
     if @value
       raise "BOOM!"
     end
-
+    count = 1
     if adjacent_bombs == 0
-      @neighbors.each do |neighbor, _|
-        neighbor.flip unless neighbor.revealed or neighbor.flag
+       @neighbors.each do |neighbor, _|
+        count+= neighbor.flip unless neighbor.revealed or neighbor.flag
       end
     end
+    count
   end
 
   def toggle_flag
