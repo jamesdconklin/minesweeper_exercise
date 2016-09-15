@@ -35,7 +35,6 @@ class Vertex
     neighbors[neighbor] = weight
   end
 
-
   def self.enqueue(queue, parent, child, nq_fn=nil)
     if nq_fn
       nq_fn.call(queue, parent, child)

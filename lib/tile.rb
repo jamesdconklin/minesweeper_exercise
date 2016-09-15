@@ -14,14 +14,21 @@ class Tile < Vertex
     super(options)
   end
 
-  # def inspect
-  #   "(#{x},#{y})"
-  # end
+  def adjacent_bombs
+    @neighbors.count {|n, _| n.value}
+  end
 
   def flip
+    return if flag
     @revealed = true
     if @value
       raise "BOOM!"
+    end
+
+    if adjacent_bombs == 0
+      @neighbors.each do |neighbor, _|
+        neighbor.flip unless neighbor.revealed or neighbor.flag
+      end
     end
   end
 
@@ -34,7 +41,7 @@ class Tile < Vertex
       if value
         "[B]"
       else
-        "[#{@neighbors.count {|n, _| n.value}}]"
+        "[#{adjacent_bombs}]"
       end
     else
       "[ ]"

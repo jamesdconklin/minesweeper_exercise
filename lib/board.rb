@@ -32,7 +32,7 @@ class Board
           curr.connect(right) if right
           curr.connect(down) if down
           curr.connect(down_right) if down_right
-          curr.connect(down_left) if down_left
+          curr.connect(down_left) if down_left && idx > 0
         end
       end
     end
