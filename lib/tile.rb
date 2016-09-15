@@ -22,7 +22,7 @@ class Tile < Vertex
     @revealed = true
     if @value
       raise "BOOM!"
-    end 
+    end
   end
 
   def toggle_flag

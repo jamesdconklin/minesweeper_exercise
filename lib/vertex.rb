@@ -23,7 +23,7 @@ class Vertex
   end
 
   def inspect
-    "<Node (#{@x},#{@y}), value #{@value}, revealed #{@revealed}]"
+    "<Node (#{@x},#{@y}), value #{@value}, revealed #{@revealed}>"
   end
 
   def to_s
